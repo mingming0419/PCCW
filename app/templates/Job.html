@@ -18,36 +18,9 @@
 
         <p>Following is a list of all our current vacancies. You can search our vacancies here by selecting a preferred Work Location, Category or Posted Date from the menus below:</p>
         <body>
-<style>
- 
- td {
-        width: 150px;
-        text-align: center;
-        border: 1px solid black;
-        padding: 5px;
-      }
-</style>
-<table>
-  <thead>
-    <tr>
-        <th>Job_title</th>
-        <th>Location</th>
-        <th>Job_category</th>
-        <th>Posted</th>
-    </tr>
-    </thead>    
-    <tbody>
-     {% for row in data | safe %}  
-            <tr>
-                <td>{{row[0]}}</td>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
-                <td>{{row[3]}}</td>
-                
-            </tr>
-        {% endfor %}
-    </tbody>
-    </table>
+
+        <P>{{% for signle_data in data: %}}</P>
+        <p> {{ data.Id }}</p>
     </div>
 </div>
 {% endblock %}

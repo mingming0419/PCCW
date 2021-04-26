@@ -1,7 +1,7 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.fieldwidgets import Select2Widget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
-from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW
+from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app import appbuilder, db
 from flask_appbuilder.baseviews import expose, BaseView
@@ -90,8 +90,21 @@ class investing_in_pccw_pageview(BaseView):
     def investing_in_pccw_view(self):
         result = db.session.query(Investing_in_PCCW.Investing_in_PCCW_content).first()
         param1 = "investing in pccw view"
+        param2 = result
         self.update_redirect()
-        return self.render_template('investing_in_PCCW.html', param1 = param1, result = result)
+        return self.render_template('investing_in_PCCW.html', param1 = param1, param2 = param2, result = result)
+
+class Financial_Results_table_view(ModelView):
+    datamodel = SQLAInterface(Financial_Results_table)
+
+'''class Financial_Results_table_pageview(BaseView):
+    default_view = 'Financial_Results_table_view'''
+
+class Annual_Results_table_view(ModelView):
+    datamodel = SQLAInterface(Annual_Results_table)
+
+'''class Annual_Results_table_pageview(BaseView):
+    default_view = 'Annual_Results_table_view'''
 
 class NewsCategoryView(ModelView):
     datamodel = SQLAInterface(NewsCategory)
@@ -112,7 +125,19 @@ class NewsPageView(BaseView):
         self.update_redirect()
         return self.render_template('news.html', param1 = param1)
 
-
+class Fast_Facts_PCCW_Limited_view(ModelView):
+    datamodel = SQLAInterface(Fast_Facts_PCCW_Limited)
+    
+class Fast_Facts_PCCW_Limited_pageview(BaseView):
+    default_view = 'Fast_Facts_PCCW_Limited_view'
+                                                    
+    @expose('/Fast_Facts_PCCW_Limited_view/')
+    def investing_in_pccw_view(self):
+        result = db.session.query(Fast_Facts_PCCW_Limited.Fast_Facts_PCCW_Limited_content).first()
+        param1 = "Fast_Facts_PCCW_Limited_view"
+        param2 = result
+        self.update_redirect()
+        return self.render_template('Fast_Facts_PCCW_Limited.html', param1 = param1, param2 = param2, result = result)
 
 db.create_all()
 
@@ -124,10 +149,11 @@ appbuilder.add_link("Global News", href="/newspageview/global_news/", category="
 appbuilder.add_view(investing_in_pccw_pageview, 'investing in pccw', category="Investor Relations")
 appbuilder.add_view(Investing_in_PCCW_view_inputed_data, 'Investing_in_PCCW_view_inputed_data', category="Investor Relations")
 '''appbuilder.add_link("investing in pccw", href="/investor_relations_view/investing_in_pccw_view/", category="Investor Relations")'''
+appbuilder.add_view(Financial_Results_table_view, 'Financial_Results_table', category="Investor Relations")
+appbuilder.add_view(Fast_Facts_PCCW_Limited_view, 'Fast_Facts_PCCW_Limited', category="Investor Relations")
 
 """ Custom Views """
 appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category="Admin")
-appbuilder.add_view(MenuCategoryView, "MenuCategory", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(MenuCategoryView, "MenuCategory", icon="fa-folder-open-o", category="Admin")                                                                                                                                                                                        
 appbuilder.add_view(NewsView, "News", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(NewsCategoryView, "NewsCategory", icon="fa-folder-open-o", category="Admin")
-
