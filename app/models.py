@@ -125,11 +125,25 @@ class Investing_in_PCCW(Model):
     __tablename__ = 'Investing_in_PCCW'
     id = Column(Integer, primary_key=True)
     Investing_in_PCCW_title = Column(String(255), nullable=False)
-    Investing_in_PCCW_content = Column(Text(10000), nullable=False)
+    Investing_in_PCCW_content = Column(String(10000), nullable=False)
 
-'This Investing_in_PCCW table is stored are html code for '
+'This Investing_in_PCCW table is stored are html code for render investing_in_PCCW.html'
     
 class Investor_Contacts(Model):
     __tablename__= 'Investor_Contacts'
     id = Column(Integer, primary_key=True)
-    Investor_Contacts_tit
+    Investor_Contacts_title = Column(String(255), nullable=False)
+    Investing_in_Contacts_content = Column(String(10000), nullable=False)
+
+class FAQs(Model):
+    __tablename__= 'FAQs'
+    id = Column(Integer, primary_key=True)
+    FAQs_title = Column(String(255), nullable=False)
+    FAQs_content = Column(String(10000), nullable=False)
+
+class Fast_Facts_PCCW_Limited(Model):
+    __tablename__='Fast_Facts_PCCW_Limited'
+    id = Column(Integer, primary_key=True)
+    Fast_Facts_PCCW_Limited_title = Column(String(255), nullable=False)
+    Fast_Facts_PCCW_Limited_content = Column(String(10000), nullable=False)
+    

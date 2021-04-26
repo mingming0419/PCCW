@@ -68,9 +68,9 @@ class Careers_with_usPageView(BaseView):
 
     @expose('/Careers_with_usView/')
     def Careers_with_usView(self):
-        param1 = 'Careers with us'
+        data = db.session.query(Careers_with_us).all()
         self.update_redirect()
-        return self.render_template('Job.html', param1 = param1)
+        return self.render_template('Job.html', data=data)
 
 class Investor_Relations_view(ModelView):
     datamodel = SQLAInterface(Investor_Relations)
@@ -91,7 +91,7 @@ class investing_in_pccw_pageview(BaseView):
         result = db.session.query(Investing_in_PCCW.Investing_in_PCCW_content).first()
         param1 = "investing in pccw view"
         self.update_redirect()
-        return self.render_template('investing_in_PCCW.html', param1 = param1, result=result)
+        return self.render_template('investing_in_PCCW.html', param1 = param1, result = result)
 
 class NewsCategoryView(ModelView):
     datamodel = SQLAInterface(NewsCategory)

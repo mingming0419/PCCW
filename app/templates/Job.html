@@ -37,12 +37,12 @@
     </tr>
     </thead>    
     <tbody>
-     {% for row in data %}    
+     {% for row in data | safe %}  
             <tr>
+                <td>{{row[0]}}</td>
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
-                <td>{{row[4]}}</td>
                 
             </tr>
         {% endfor %}
