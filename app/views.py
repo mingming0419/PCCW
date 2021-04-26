@@ -1,7 +1,7 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.fieldwidgets import Select2Widget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
-from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, News, NewsCategory
+from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app import appbuilder, db
 from flask_appbuilder.baseviews import expose, BaseView
@@ -9,7 +9,7 @@ from flask_appbuilder.baseviews import expose, BaseView
 
 def department_query():
     return db.session.query(Department)
-
+    
 
 class EmployeeHistoryView(ModelView):
     datamodel = SQLAInterface(EmployeeHistory)
@@ -58,6 +58,40 @@ class MenuCategoryView(ModelView):
 class NewsView(ModelView):
     datamodel = SQLAInterface(News)
     list_columns = ['id', 'title', 'content', 'date', 'newsCat_id']
+    
+class Careers_with_usView(ModelView):
+    datamodel = SQLAInterface(Careers_with_us)
+    list_columns = ['id', 'Job_title', 'Location', 'Job_category', 'Posted']
+
+class Careers_with_usPageView(BaseView):
+    default_view = 'Careers_with_usView'
+
+    @expose('/Careers_with_usView/')
+    def Careers_with_usView(self):
+        param1 = 'Careers with us'
+        self.update_redirect()
+        return self.render_template('Job.html', param1 = param1)
+
+class Investor_Relations_view(ModelView):
+    datamodel = SQLAInterface(Investor_Relations)
+    list_columns = ['id', 'Investor_Relations_title', 'Investor_Relations_link_id']
+
+class Investing_in_PCCW_view_inputed_data(ModelView):
+    datamodel = SQLAInterface(Investing_in_PCCW)
+    list_columns = ['id', 'Investing_in_PCCW_title', 'Investing_in_PCCW_content']
+
+class Investing_in_PCCW_view(ModelView):
+    datamodel = SQLAInterface(Investing_in_PCCW)
+
+class investing_in_pccw_pageview(BaseView):
+    default_view = 'investing_in_pccw_view'
+    
+    @expose('/investing_in_pccw_view/')
+    def investing_in_pccw_view(self):
+        result = db.session.query(Investing_in_PCCW.Investing_in_PCCW_content).first()
+        param1 = "investing in pccw view"
+        self.update_redirect()
+        return self.render_template('investing_in_PCCW.html', param1 = param1, result=result)
 
 class NewsCategoryView(ModelView):
     datamodel = SQLAInterface(NewsCategory)
@@ -76,14 +110,20 @@ class NewsPageView(BaseView):
     def global_news(self):
         param1 = 'Global News'
         self.update_redirect()
-        return self.render_template('news.html', param1=param1)
+        return self.render_template('news.html', param1 = param1)
+
 
 
 db.create_all()
 
 """ Page View """
+appbuilder.add_view(Careers_with_usView, 'Careers with us', category="Job")
+appbuilder.add_view(Careers_with_usPageView, 'Careers_with_usView', category="Job")
 appbuilder.add_view(NewsPageView, 'Local News', category="News")
 appbuilder.add_link("Global News", href="/newspageview/global_news/", category="News")
+appbuilder.add_view(investing_in_pccw_pageview, 'investing in pccw', category="Investor Relations")
+appbuilder.add_view(Investing_in_PCCW_view_inputed_data, 'Investing_in_PCCW_view_inputed_data', category="Investor Relations")
+'''appbuilder.add_link("investing in pccw", href="/investor_relations_view/investing_in_pccw_view/", category="Investor Relations")'''
 
 """ Custom Views """
 appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category="Admin")

@@ -106,3 +106,23 @@ class NewsCategory(Model):
     __tablename__ = 'news_category'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
+    
+class Careers_with_us(Model):
+   __tablename__ = 'Careers_with_us'
+   id = Column(Integer, primary_key=True)
+   Job_title = Column(String(255), nullable=False)
+   Location = Column(String(255), nullable=False)
+   Job_category = Column(String(255), nullable=False)
+   Posted = Column(Date, default=datetime.date.today(), nullable=True)
+
+class Investor_Relations(Model):
+    __tablename__ = 'Investor_Relations'
+    id = Column(Integer, primary_key=True)
+    Investor_Relations_title = Column(String(255), nullable=False)
+    Investor_Relations_link = Column(String(255), nullable=False)
+
+class Investing_in_PCCW(Model):
+    __tablename__ = 'Investing_in_PCCW'
+    id = Column(Integer, primary_key=True)
+    Investing_in_PCCW_title = Column(String(255), nullable=False)
+    Investing_in_PCCW_content = Column(Text(10000), nullable=False)

@@ -1,0 +1,53 @@
+<!-- extend base layout -->
+{% extends "index_base.html" %}
+
+{% block head_css %}
+        {{ super() }}
+        <link href="{{url_for('static',filename='css/custom.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="page-main-image investors-index-full" style="background-image: url(PCCW/static/img/banner_career_opp_l.jpg);" data-mobile-bg="PCCW/static/img/banner_career_opp_l.jpg" data-tablet-bg="PCCW/static/img/banner_career_opp_l.jpg" data-desktop-bg="PCCW/static/img/banner_career_opp_l.jpg">
+   <div class="page-image-container">
+      <div class="caption">
+         <h1>Careers with us</h1>
+      </div>
+        <p>PCCW provides a harmonious yet challenging environment in which you will be encouraged to utilize your acquired knowledge, while continuously developing new skill sets. Here you will find job opportunities ranging from entry to managerial levels for both fresh university graduates and experienced professionals.</p>
+
+        <p>Following is a list of all our current vacancies. You can search our vacancies here by selecting a preferred Work Location, Category or Posted Date from the menus below:</p>
+        <body>
+<style>
+ 
+ td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+      }
+</style>
+<table>
+  <thead>
+    <tr>
+        <th>Job_title</th>
+        <th>Location</th>
+        <th>Job_category</th>
+        <th>Posted</th>
+    </tr>
+    </thead>    
+    <tbody>
+     {% for row in data %}    
+            <tr>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}
