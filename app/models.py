@@ -126,3 +126,10 @@ class Investing_in_PCCW(Model):
     id = Column(Integer, primary_key=True)
     Investing_in_PCCW_title = Column(String(255), nullable=False)
     Investing_in_PCCW_content = Column(Text(10000), nullable=False)
+
+'This Investing_in_PCCW table is stored are html code for '
+    
+class Investor_Contacts(Model):
+    __tablename__= 'Investor_Contacts'
+    id = Column(Integer, primary_key=True)
+    Investor_Contacts_tit
