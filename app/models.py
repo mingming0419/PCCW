@@ -150,7 +150,7 @@ class Investor_Contacts(Model):
     __tablename__= 'Investor_Contacts'
     id = Column(Integer, primary_key=True)
     Investor_Contacts_title = Column(String(255), nullable=False)
-    Investing_in_Contacts_content = Column(String(10000), nullable=False)
+    Investor_Contacts_content = Column(String(10000), nullable=False)
 
 class FAQs(Model):
     __tablename__= 'FAQs'
@@ -163,5 +163,4 @@ class Fast_Facts_PCCW_Limited(Model):
     id = Column(Integer, primary_key=True)
     Fast_Facts_PCCW_Limited_title = Column(String(255), nullable=False)
     Fast_Facts_PCCW_Limited_content = Column(String(10000), nullable=False)
-        
-        
+    

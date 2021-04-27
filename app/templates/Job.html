@@ -9,18 +9,30 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="page-main-image investors-index-full" style="background-image: url(PCCW/static/img/banner_career_opp_l.jpg);" data-mobile-bg="PCCW/static/img/banner_career_opp_l.jpg" data-tablet-bg="PCCW/static/img/banner_career_opp_l.jpg" data-desktop-bg="PCCW/static/img/banner_career_opp_l.jpg">
-   <div class="page-image-container">
-      <div class="caption">
+        
          <h1>Careers with us</h1>
       </div>
         <p>PCCW provides a harmonious yet challenging environment in which you will be encouraged to utilize your acquired knowledge, while continuously developing new skill sets. Here you will find job opportunities ranging from entry to managerial levels for both fresh university graduates and experienced professionals.</p>
 
         <p>Following is a list of all our current vacancies. You can search our vacancies here by selecting a preferred Work Location, Category or Posted Date from the menus below:</p>
         <body>
+<table style="width:100%">
+  <tr>
+    <th>Job Title</th>
+    <th>Location</th>
+    <th>Categorye</th>
+    <th>Posted</th>
+  </tr>
+{% for signle_data in data: %}
+   <tr>
+    <td>{{ signle_data.Job_title }}</td>
+    <td>{{ signle_data.Location }}</td>
+    <td>{{ signle_data.Job_category }}</td>
+    <td>{{ signle_data.Posted }}</td>
+  </tr>
 
-        <P>{{% for signle_data in data: %}}</P>
-        <p> {{ data.Id }}</p>
+
+{% endfor %}
     </div>
 </div>
 {% endblock %}
