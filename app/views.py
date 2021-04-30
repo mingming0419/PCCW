@@ -172,7 +172,7 @@ class Investor_Contacts_pageview(BaseView):
         param2 = result
         self.update_redirect()
         return self.render_template('Investor_Contacts.html', param1 = param1, param2 = param2, result = result)
-    
+                                                                            
 class Reportview(ModelView):
     datamodel = SQLAInterface(Report)
     list_columns = ['id', 'year', 'report_name', 'report_link']
@@ -196,9 +196,8 @@ appbuilder.add_view(investing_in_pccw_pageview, 'investing in pccw', category="I
 appbuilder.add_view(Investing_in_PCCW_view_inputed_data, 'Investing_in_PCCW_view_inputed_data', category="Investor Relations")
 '''appbuilder.add_link("investing in pccw", href="/investor_relations_view/investing_in_pccw_view/", category="Investor Relations")'''
 appbuilder.add_view(Financial_Results_table_view, 'Financial_Results_table', category="Investor Relations")
-appbuilder.add_view(Fast_Facts_PCCW_Limited_view, 'Fast_Facts_PCCW_Limited', category="Investor Relations")
-appbuilder.add_view(FAQs_view, 'FAQs', category="Investor Relations")
-appbuilder.add_view(Investor_Contacts_view, 'Investor_Contacts', category="Investor Relations")
+appbuilder.add_view(Fast_Facts_PCCW_Limited_view, 'Fast_Facts_PCCW_Limited_input', category="Investor Relations")
+appbuilder.add_view(Investor_Contacts_view, 'Investor_Contacts_input', category="Investor Relations")
 appbuilder.add_view(Investor_Contacts_pageview, 'Investor_Contacts', category="Investor Relations")
 appbuilder.add_view(FAQs_pageview, 'FAQs', category="Investor Relations")
 appbuilder.add_view(Fast_Facts_PCCW_Limited_pageview, 'Fast_Facts_PCCW_Limited', category="Investor Relations")
@@ -211,3 +210,4 @@ appbuilder.add_view(NewsView, "News", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(NewsCategoryView, "NewsCategory", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(Careers_with_usView, "Jobs",icon="fa-folder-open-o" , category="Admin")
 appbuilder.add_view(Reportview, "Report",icon="fa-folder-open-o" , category="Admin")
+appbuilder.add_view(FAQs_view, 'FAQs',icon="fa-folder-open-o" , category="Admin")
