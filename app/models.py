@@ -2,6 +2,10 @@ import datetime
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, Date, Text
 from sqlalchemy.orm import relationship
 from flask_appbuilder import Model
+from wtforms import Form, StringField
+from wtforms.validators import DataRequired
+from flask_appbuilder.fieldwidgets import BS3TextFieldWidget
+from flask_appbuilder.forms import DynamicForm
 
 class Gender(Model):
     id = Column(Integer, primary_key=True)
@@ -163,4 +167,11 @@ class Fast_Facts_PCCW_Limited(Model):
     id = Column(Integer, primary_key=True)
     Fast_Facts_PCCW_Limited_title = Column(String(255), nullable=False)
     Fast_Facts_PCCW_Limited_content = Column(String(10000), nullable=False)
+    
+class Report(Model):
+    __tablename__='report'
+    id = Column(Integer, primary_key=True)
+    year = Column(String(255), nullable=False)
+    report_name = Column(String(255), nullable=False)
+    report_link = Column(String(255), nullable=False)
     

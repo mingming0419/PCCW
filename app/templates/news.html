@@ -9,8 +9,25 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <h1>News</h1>
-        testing
+        <h1>{{param1}}</h1>
+        <h2>News</h2>
+
+
+<table style="width:100%">
+<tr>
+    <th>Title</th>
+ </tr>
+    {% for signle_data in newsdata %}
+<tr>
+    <td>{{ signle_data.title }}</td>
+    <td>{{ signle_data.date }}</td>
+    <td><a href= {{ signle_data.content }} >Full Content</a></td>
+  </tr>
+ 
+  {% else %}
+  <td align="center"><h1>No recent New</h1></td>
+   </table>
+  {% endfor %}
     </div>
 </div>
 {% endblock %}

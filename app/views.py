@@ -1,7 +1,7 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.fieldwidgets import Select2Widget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
-from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited, FAQs, Investor_Contacts
+from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited, FAQs, Investor_Contacts, Report
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app import appbuilder, db
 from flask_appbuilder.baseviews import expose, BaseView
@@ -115,15 +115,17 @@ class NewsPageView(BaseView):
 
     @expose('/local_news/')
     def local_news(self):
+        newsdata = db.session.query(News).filter(News.newsCat_id == '1')
         param1 = 'Local News'
         self.update_redirect()
-        return self.render_template('news.html', param1 = param1)
+        return self.render_template('news.html', param1 = param1, newsdata = newsdata)
 
     @expose('/global_news/')
     def global_news(self):
+        newsdata = db.session.query(News).filter(News.newsCat_id == '2')
         param1 = 'Global News'
         self.update_redirect()
-        return self.render_template('news.html', param1 = param1)
+        return self.render_template('news.html', param1 = param1, newsdata = newsdata)
 
 class Fast_Facts_PCCW_Limited_view(ModelView):
     datamodel = SQLAInterface(Fast_Facts_PCCW_Limited)
@@ -170,12 +172,24 @@ class Investor_Contacts_pageview(BaseView):
         param2 = result
         self.update_redirect()
         return self.render_template('Investor_Contacts.html', param1 = param1, param2 = param2, result = result)
-        
+    
+class Reportview(ModelView):
+    datamodel = SQLAInterface(Report)
+    list_columns = ['id', 'year', 'report_name', 'report_link']
+    
+class Report_pageview(BaseView):
+    default_view = 'Report_view'
+    
+    @expose('Report_view')
+    def Report_view(self):
+        data = db.session.query(Report).all()
+        self.update_redirect()
+        return self.render_template('report.html', data = data)
+    
 db.create_all()
 
 """ Page View """
-appbuilder.add_view(Careers_with_usView, 'Careers_with_usView', category="Job")
-appbuilder.add_view(Careers_with_usPageView, 'Careers With Us', category="Job")
+appbuilder.add_view(Careers_with_usPageView, 'Careers With Us', category="Careers")
 appbuilder.add_view(NewsPageView, 'Local News', category="News")
 appbuilder.add_link("Global News", href="/newspageview/global_news/", category="News")
 appbuilder.add_view(investing_in_pccw_pageview, 'investing in pccw', category="Investor Relations")
@@ -188,9 +202,12 @@ appbuilder.add_view(Investor_Contacts_view, 'Investor_Contacts', category="Inves
 appbuilder.add_view(Investor_Contacts_pageview, 'Investor_Contacts', category="Investor Relations")
 appbuilder.add_view(FAQs_pageview, 'FAQs', category="Investor Relations")
 appbuilder.add_view(Fast_Facts_PCCW_Limited_pageview, 'Fast_Facts_PCCW_Limited', category="Investor Relations")
+appbuilder.add_view(Report_pageview, "Environmental, Social and Governance Report", category="CSR")
 
 """ Custom Views """
 appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(MenuCategoryView, "MenuCategory", icon="fa-folder-open-o", category="Admin")                                                                                                                                                                                        
 appbuilder.add_view(NewsView, "News", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(NewsCategoryView, "NewsCategory", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(Careers_with_usView, "Jobs",icon="fa-folder-open-o" , category="Admin")
+appbuilder.add_view(Reportview, "Report",icon="fa-folder-open-o" , category="Admin")

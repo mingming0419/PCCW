@@ -1,0 +1,34 @@
+{% extends "index_base.html" %}
+
+{% block head_css %}
+        {{ super() }}
+        <link href="{{url_for('static',filename='css/custom.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <head>
+            <h1>Environmental, Social and Governance Report</h1>
+        </head>
+        <body>
+            <h3>Environmental, Social and Governance Report</h3>
+            <p>The Report highlights the Group’s ESG performance and initiatives which demonstrates our commitment to building a sustainable future. 
+            It also explains how the Group complies with the ESG Reporting Guide to the Rules Governing the Listing of Securities on The Stock Exchange of Hong Kong Limited.</p>
+            <br>
+            <table style="width:100%">
+  <tr>
+    <th>year</th>
+  </tr>
+{% for signle_data in data %}
+   <tr>
+    <td>{{ signle_data.year }}</td>
+    <td>{{ signle_data.report_name }}</p></td>
+    <td><a href={{ signle_data.report_link }}>Full Report</td>
+  </tr>
+        </body>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
