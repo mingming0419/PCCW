@@ -1,7 +1,7 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.fieldwidgets import Select2Widget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
-from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited, FAQs, Investor_Contacts, Report, Leadership
+from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited, FAQs, Investor_Contacts, Report, Leadership, Senior_corporate
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app import appbuilder, db
 from flask_appbuilder.baseviews import expose, BaseView
@@ -107,7 +107,20 @@ class leadershipPageView(BaseView):
         data = db.session.query(Leadership).all()
         self.update_redirect()
         return self.render_template('leadership.html', data=data)
-
+        
+class senior_corporate(ModelView):
+ datamodel = SQLAInterface(Senior_corporate)
+ list_columns = ['id', 'name', 'contect']
+ 
+class Senior_corporatePageView(BaseView):
+    default_view = 'Senior_corporateview'
+    
+    @expose('/Senior_corporateview/')
+    def Senior_corporateview(self):
+        data = db.session.query(Senior_corporate).all()
+        self.update_redirect()
+        return self.render_template('Senior_corporate.html', data=data)
+      
 class Financial_Results_table_view(ModelView):
     datamodel = SQLAInterface(Financial_Results_table)
 

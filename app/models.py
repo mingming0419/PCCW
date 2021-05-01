@@ -180,3 +180,9 @@ class Leadership(Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     contect = Column(String(500), nullable=False)
+    
+class Senior_corporate(Model):
+  tablename = 'senior_corporate'
+  id = Column(Integer, primary_key=True)
+  name = Column(String(50), nullable=False)
+  contect = Column(String(500), nullable=False)
