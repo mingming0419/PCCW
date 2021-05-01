@@ -1,7 +1,7 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.fieldwidgets import Select2Widget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
-from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited, FAQs, Investor_Contacts, Report, Leadership, Senior_corporate
+from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, NewsCategory, Careers_with_us, News, Investor_Relations, Investing_in_PCCW, Financial_Results_table, Annual_Results_table, Interim_Results_table, Fast_Facts_PCCW_Limited, FAQs, Investor_Contacts, Report, Leadership, Senior_corporate, OCM, verify_Investor_Relations_title
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app import appbuilder, db
 from flask_appbuilder.baseviews import expose, BaseView
@@ -80,6 +80,10 @@ class Investing_in_PCCW_view_inputed_data(ModelView):
     datamodel = SQLAInterface(Investing_in_PCCW)
     list_columns = ['id', 'Investing_in_PCCW_title', 'Investing_in_PCCW_content']
 
+class verify_Investor_Relations_title_inputed_data(ModelView):
+	datamodel = SQLAInterface(verify_Investor_Relations_title)
+	list_columns = ['id', 'Investing_in_PCCW_title']
+
 class Investing_in_PCCW_view(ModelView):
     datamodel = SQLAInterface(Investing_in_PCCW)
 
@@ -120,6 +124,19 @@ class Senior_corporatePageView(BaseView):
         data = db.session.query(Senior_corporate).all()
         self.update_redirect()
         return self.render_template('Senior_corporate.html', data=data)
+        
+class OCM(ModelView):
+    datamodel = SQLAInterface(OCM)
+    list_columns = ['id', 'OCM_content']
+    
+class OCM_pageview(BaseView):
+    default_view = 'OCM_view'
+    
+    @expose('/OCM_view/')
+    def OCM_view(self):
+        data = db.session.query(OCM).first()
+        self.update_redirect()
+        return self.render_template('OCM.html', data=data)
       
 class Financial_Results_table_view(ModelView):
     datamodel = SQLAInterface(Financial_Results_table)
@@ -227,8 +244,10 @@ appbuilder.add_view(Investor_Contacts_pageview, 'Investor_Contacts', category="I
 appbuilder.add_view(FAQs_pageview, 'FAQs', category="Investor Relations")
 appbuilder.add_view(Fast_Facts_PCCW_Limited_pageview, 'Fast_Facts_PCCW_Limited', category="Investor Relations")
 appbuilder.add_view(Report_pageview, "Environmental, Social and Governance Report", category="CSR")
-appbuilder.add_view(leadershipPageView, "Leadership", category="About Us")
-
+appbuilder.add_view(leadershipPageView, "Board of Directors", category="About Us")
+appbuilder.add_view(Senior_corporatePageView, "Senior Corporate Executives", category="About Us")
+appbuilder.add_view(OCM_pageview, "Our Customers and Marketplace", category="CSR")
+appbuilder.add_view(verify_Investor_Relations_title_inputed_data, "verify_Investor_Relations_title_inputed_data", category="Investor Relations")
 """ Custom Views """
 appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(MenuCategoryView, "MenuCategory", icon="fa-folder-open-o", category="Admin")                                                                                                                                                                                        

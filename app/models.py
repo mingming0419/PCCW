@@ -128,8 +128,13 @@ class Investor_Relations(Model):
 class Investing_in_PCCW(Model):
     __tablename__ = 'Investing_in_PCCW'
     id = Column(Integer, primary_key=True)
-    Investing_in_PCCW_title = Column(String(255), nullable=False)
+    Investing_in_PCCW_title = Column(String(255), ForeignKey('verify_Investor_Relations_title.Investing_in_PCCW_title'),nullable=False)
     Investing_in_PCCW_content = Column(String(10000), nullable=False)
+
+class verify_Investor_Relations_title(Model):
+    __tablename__ = 'verify_Investor_Relations_title'
+    id = Column(Integer, primary_key=True)
+    Investing_in_PCCW_title = Column(String(255), nullable=False)
 
 class Financial_Results_table(Model):
     __tablename__ = "Financial_Results_table"
@@ -182,7 +187,13 @@ class Leadership(Model):
     contect = Column(String(500), nullable=False)
     
 class Senior_corporate(Model):
-  tablename = 'senior_corporate'
-  id = Column(Integer, primary_key=True)
-  name = Column(String(50), nullable=False)
-  contect = Column(String(500), nullable=False)
+   __tablename__  = 'senior_corporate'
+   id = Column(Integer, primary_key=True)
+   name = Column(String(50), nullable=False)
+   contect = Column(String(500), nullable=False)
+  
+class OCM(Model):
+    __tablename__= 'OCM'
+    id = Column(Integer, primary_key=True)
+    content = Column(String(10000), nullable=False)
+
