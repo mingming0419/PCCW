@@ -128,7 +128,7 @@ class Investor_Relations(Model):
 class Investing_in_PCCW(Model):
     __tablename__ = 'Investing_in_PCCW'
     id = Column(Integer, primary_key=True)
-    Investing_in_PCCW_title = Column(String(255), ForeignKey('verify_Investor_Relations_title.Investing_in_PCCW_title'),nullable=False)
+    Investing_in_PCCW_title = Column(String(255), nullable=False)
     Investing_in_PCCW_content = Column(String(10000), nullable=False)
 
 class verify_Investor_Relations_title(Model):
