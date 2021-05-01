@@ -98,15 +98,6 @@ class investing_in_pccw_pageview(BaseView):
 class leadership(ModelView):
  datamodel = SQLAInterface(Leadership)
  list_columns = ['id', 'name', 'contect']
- 
-class leadershipPageView(BaseView):
-    default_view = 'Leadershipview'
-  
-    @expose('/Leadershipview/')
-    def Leadershipview(self):
-        data = db.session.query(Leadership).all()
-        self.update_redirect()
-        return self.render_template('leadership.html', data=data)
 
 class Financial_Results_table_view(ModelView):
     datamodel = SQLAInterface(Financial_Results_table)
@@ -214,7 +205,6 @@ appbuilder.add_view(Investor_Contacts_pageview, 'Investor_Contacts', category="I
 appbuilder.add_view(FAQs_pageview, 'FAQs', category="Investor Relations")
 appbuilder.add_view(Fast_Facts_PCCW_Limited_pageview, 'Fast_Facts_PCCW_Limited', category="Investor Relations")
 appbuilder.add_view(Report_pageview, "Environmental, Social and Governance Report", category="CSR")
-appbuilder.add_view(leadershipPageView, "Leadership", category="About Us")
 
 """ Custom Views """
 appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category="Admin")
@@ -226,4 +216,3 @@ appbuilder.add_view(Reportview, "Report",icon="fa-folder-open-o" , category="Adm
 appbuilder.add_view(FAQs_view, 'FAQs',icon="fa-folder-open-o" , category="Admin")
 appbuilder.add_view(Investor_Contacts_view, 'Investor_Contacts',icon="fa-folder-open-o" , category="Admin")
 appbuilder.add_view(Fast_Facts_PCCW_Limited_view, 'Fast_Facts_PCCW_Limited',icon="fa-folder-open-o" , category="Admin")
-

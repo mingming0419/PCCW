@@ -1,0 +1,27 @@
+<!-- extend base layout -->
+{% extends "index_base.html" %}
+
+{% block head_css %}
+        {{ super() }}
+        <link href="{{url_for('static',filename='css/custom.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1>Leadership</h1>
+        <p><h3>Learn more about our Board of Directors, senior corporate executives and business unit heads.</h3></p>
+<table style="width:100%">
+     <tr>
+    <th>Name</th>
+    <th>Contect</th>
+    </tr>
+{% for signle_data in data %}  
+        <tr>
+            <td>{{ signle_data.name }}</td>
+            <td>{{ signle_data.contect }}</td>
+        </tr>
+{% endfor %}        
+    </div>
+</div>
+{% endblock %}

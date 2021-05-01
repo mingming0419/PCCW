@@ -174,4 +174,9 @@ class Report(Model):
     year = Column(String(255), nullable=False)
     report_name = Column(String(255), nullable=False)
     report_link = Column(String(255), nullable=False)
-    
+   
+class Leadership(Model):
+    __tablename__ = 'leadership'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    contect = Column(String(500), nullable=False)
