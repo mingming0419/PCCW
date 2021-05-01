@@ -84,8 +84,6 @@ class verify_Investor_Relations_title_inputed_data(ModelView):
 	datamodel = SQLAInterface(verify_Investor_Relations_title)
 	list_columns = ['id', 'Investing_in_PCCW_title']
 
-'''it is verify title has match?'''
-
 class Investing_in_PCCW_view(ModelView):
     datamodel = SQLAInterface(Investing_in_PCCW)
 
@@ -129,16 +127,16 @@ class Senior_corporatePageView(BaseView):
         
 class OCM_view(ModelView):
     datamodel = SQLAInterface(OCM)
-    list_columns = ['id', 'content']
+    list_columns = ['id', 'OCM_content']
     
 class OCM_pageview(BaseView):
     default_view = 'OCM_view'
     
     @expose('/OCM_view/')
     def OCM_view(self):
-        result = db.session.query(OCM.content).first()
+        data = db.session.query(OCM).first()
         self.update_redirect()
-        return self.render_template('OCM.html', result = result)
+        return self.render_template('OCM.html', data=data)
       
 class Financial_Results_table_view(ModelView):
     datamodel = SQLAInterface(Financial_Results_table)
@@ -250,7 +248,6 @@ appbuilder.add_view(leadershipPageView, "Board of Directors", category="About Us
 appbuilder.add_view(Senior_corporatePageView, "Senior Corporate Executives", category="About Us")
 appbuilder.add_view(OCM_pageview, "Our Customers and Marketplace", category="CSR")
 appbuilder.add_view(verify_Investor_Relations_title_inputed_data, "verify_Investor_Relations_title_inputed_data", category="Investor Relations")
-appbuilder.add_view(OCM_view, "OCM_view_data", category="CSR")
 """ Custom Views """
 appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(MenuCategoryView, "MenuCategory", icon="fa-folder-open-o", category="Admin")                                                                                                                                                                                        

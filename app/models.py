@@ -195,5 +195,4 @@ class Senior_corporate(Model):
 class OCM(Model):
     __tablename__= 'OCM'
     id = Column(Integer, primary_key=True)
-    content = Column(String(10000), nullable=False)
-
+    content = Column(String(100000), nullable=False)
